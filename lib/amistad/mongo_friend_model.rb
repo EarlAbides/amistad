@@ -20,12 +20,18 @@ module Amistad
 
     # returns the list of approved friends
     def friends
-      self.invited + self.invited_by
+      #self.invited + self.invited_by
+      # Get unique list just in case duplicates have been created
+      self.class.find(unique_friends)
     end
 
     # total # of invited and invited_by without association loading
     def total_friends
-      (friend_ids + inverse_friend_ids).count
+      unique_friends.count
+    end
+
+    def unique_friends
+      (friend_ids + inverse_friend_ids).uniq!
     end
 
     # return the list of invited friends
