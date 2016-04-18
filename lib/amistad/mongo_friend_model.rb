@@ -31,7 +31,7 @@ module Amistad
     end
 
     def unique_friends
-      (friend_ids + inverse_friend_ids).uniq!
+      Array((friend_ids + inverse_friend_ids).uniq!)
     end
 
     # return the list of invited friends
